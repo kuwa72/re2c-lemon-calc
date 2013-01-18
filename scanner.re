@@ -40,7 +40,7 @@ int scan(scanner_state *s, scanner_token *token) {
 			free(num);
 			q = YYCURSOR;
 			// DEBUG(printf("integer, cursor: %s, number len: %ld, number: %d\n",YYCURSOR,YYCURSOR-s->start,n));
-			token->data.n = n;
+			token->n = n;
 			token->opcode = TOKEN_INTEGER;
 			
 			return 0;

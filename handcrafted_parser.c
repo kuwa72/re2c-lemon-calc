@@ -25,13 +25,13 @@ int main(int argc, char **argv) {
 		while(0 <= (r = scan(state, token))) {
 
 			switch(token->opcode) {
-				case T_INTEGER: printf("\tscanner: %d\n",token->data.n); break;
-				case T_OP_ADD:
-				case T_OP_SUB:
-				case T_OP_MUL:
-				case T_OP_DIV:
-				case T_OP_ROUND_BRACKET_OPEN:
-				case T_OP_ROUND_BRACKET_CLOSE: printf("\tscanner: %c\n",token->opcode); break;
+				case TOKEN_INTEGER: printf("\tscanner: %d\n",token->n); break;
+				case TOKEN_ADD:
+				case TOKEN_SUB:
+				case TOKEN_MUL:
+				case TOKEN_DIV:
+				case TOKEN_ROUND_BRACKET_OPEN:
+				case TOKEN_ROUND_BRACKET_CLOSE: printf("\tscanner: %c\n",token->opcode); break;
 				default: printf("\tscanner: unknown opcode\n"); break;
 			}
 

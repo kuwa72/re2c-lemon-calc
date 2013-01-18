@@ -5,7 +5,7 @@ RE2C = re2c
 CFLAGS = -Wall -ggdb -c
 RE2C_FLAGS =
 
-all: calc handcrafted_parser parser
+all: calc handcrafted_parser
 calc: scanner.o main.o parser.o
 	$(CC) -Wall -o $@ $?
 
@@ -16,7 +16,7 @@ scanner.c: scanner.re
 	$(RE2C) -D -o scanner.graphviz $?
 main.o: main.c
 	$(CC) $(CFLAGS) $?
-handcrafted_parser: handcrafted_parser.o
+handcrafted_parser: handcrafted_parser.o scanner.o
 	$(CC) -Wall -o $@ $?
 handcrafted_parser.o: handcrafted_parser.c
 	$(CC) $(CFLAGS) $?

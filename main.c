@@ -10,6 +10,6 @@
 int main(int argc, char **argv) {
 	scanner_token result;
 	result = parse_math_expr(argv[1]);
-	printf("calc(%s) = %d\n",argv[1],result.data.n);
+	printf("calc(%s) = %d\n",argv[1],result.n);
 	return EXIT_SUCCESS;
 }

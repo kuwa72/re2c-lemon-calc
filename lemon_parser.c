@@ -16,8 +16,8 @@
 #include "lemon_parser.h"
 
 scanner_token parse_math_expr(char* s) {
-scanner_token *token;
-scanner_state *state;
+scanner_token token;
+scanner_state state;
 
 int stat;
 
@@ -25,34 +25,34 @@ int stat;
 void* pParser = ParseAlloc(malloc);
 
 //do similar things to handcrafted_parser.c
-state = malloc(sizeof(scanner_state));
-token = malloc(sizeof(scanner_token));
+//state = malloc(sizeof(scanner_state));
+//token = malloc(sizeof(scanner_token));
 
-if(NULL == state || NULL == token) {return *token;}
+//if(NULL == state || NULL == token) {return token;}
 
-state->start = s;
+state.start = s;
 
-while(0 <= (stat = scan(state,token))) {
+while(0 <= (stat = scan(&state,&token))) {
 	
-	switch(token->opcode) {
+	switch(token.opcode) {
 		case TOKEN_INTEGER: 
-			printf("\tscanner says: %d\n",token->data.n);
+			printf("\tscanner says: %d\n",token.n);
 			Parse(pParser,OP_INTEGER,token);
 			break;
       	case TOKEN_ADD:
-			printf("\tscanner: %c\n",token->opcode);
+			printf("\tscanner: %c\n",token.opcode);
  			Parse(pParser,OP_ADD,token);
  			break;
 		case TOKEN_SUB:
-			printf("\tscanner: %c\n",token->opcode);
+			printf("\tscanner: %c\n",token.opcode);
 			Parse(pParser,OP_SUB,token);
 			break;
 		case TOKEN_MUL:
-			printf("\tscanner: %c\n",token->opcode);
+			printf("\tscanner: %c\n",token.opcode);
 			Parse(pParser,OP_MUL,token);
 			break;
 		case TOKEN_DIV:
-			printf("\tscanner: %c\n",token->opcode);
+			printf("\tscanner: %c\n",token.opcode);
 			Parse(pParser,OP_DIV,token);
 			break;
 		/*
@@ -64,14 +64,14 @@ while(0 <= (stat = scan(state,token))) {
 			break;
 		*/
       	default: 
-      		printf("\tscanner: unknown opcode: %c\n",token->opcode);
+      		printf("\tscanner: unknown opcode: %c\n",token.opcode);
       		break;
       	}
       	
       	//it's here, but not used:
-		state->end = state->start;
+		state.end = state.start;
 	}
 	
-	Parse(pParser,0,0);
-	return *token;
+	Parse(pParser,0,token);
+	return token;
 }

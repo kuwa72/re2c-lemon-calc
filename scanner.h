@@ -23,12 +23,8 @@ typedef struct _scanner_state {
 } scanner_state;
 
 typedef struct _scanner_token {
-
 	int opcode;
-	union {
-		int n;
-		char* str;
-	} data;
+	int n;
 	
 } scanner_token;
 
